@@ -6,6 +6,7 @@ public class EnemyMele : MonoBehaviour
     [SerializeField] private int timeDirect;
     [SerializeField] private float life;
     [SerializeField] private float maxLife;
+    [SerializeField] private float damage;
     private float timeNextDirect;
     bool isMovingLeft = false;
 
@@ -22,25 +23,39 @@ public class EnemyMele : MonoBehaviour
         life -= damage;
 
     }
-
-void FixedUpdate()
-{
-    timeNextDirect += Time.fixedDeltaTime;
-
-    if (timeNextDirect >= timeDirect)
+    void FixedUpdate()
     {
-        isMovingLeft = !isMovingLeft;
-        timeNextDirect = 0;
-        transform.localRotation = isMovingLeft ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
-    }
+        if (life <= 0)
+        {
+            Diying();
+        }
+        timeNextDirect += Time.fixedDeltaTime;
 
-    if (isMovingLeft)
-    {
-        transform.Translate(Vector3.left * speed * Time.fixedDeltaTime, Space.World);
+        if (timeNextDirect >= timeDirect)
+        {
+            isMovingLeft = !isMovingLeft;
+            timeNextDirect = 0;
+            transform.localRotation = isMovingLeft ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
+        }
+
+        if (isMovingLeft)
+        {
+            transform.Translate(Vector3.left * speed * Time.fixedDeltaTime, Space.World);
+        }
+        else
+        {
+            transform.Translate(Vector3.right * speed * Time.fixedDeltaTime, Space.World);
+        }
     }
-    else
+    void Diying()
     {
-        transform.Translate(Vector3.right * speed * Time.fixedDeltaTime, Space.World);
+        Destroy(gameObject);
     }
-}
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<MainCharacter>())
+        {
+            collision.gameObject.GetComponent<MainCharacter>().TakeDamage(damage);
+        }
+    }
 }
