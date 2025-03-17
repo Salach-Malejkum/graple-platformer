@@ -71,7 +71,7 @@ ScriptedImporter:
     textureFormatSet: 0
     applyGammaDecoding: 0
   previousAsepriteImporterSettings:
-    fileImportMode: 1
+    fileImportMode: 0
     importHiddenLayers: 0
     layerImportMode: 1
     defaultPivotSpace: 0
@@ -84,7 +84,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   asepriteImporterSettings:
-    fileImportMode: 1
+    fileImportMode: 0
     importHiddenLayers: 0
     layerImportMode: 1
     defaultPivotSpace: 0
@@ -97,7 +97,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 0
+  platformSettingsDirtyTick: 638778135063005384
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -134,7 +134,7 @@ ScriptedImporter:
       y: 4
       width: 58
       height: 36
-    spriteID: b162fbed5ad9544418e3eb71b5f0a47d
+    spriteID: 076dd4c40762b7c49a4048069fd65904
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -155,7 +155,7 @@ ScriptedImporter:
       y: 48
       width: 43
       height: 35
-    spriteID: 1ea57b9ec18f68749b67554d8a3fb641
+    spriteID: efba52ae3d09b384186a46fa0e8c2745
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -176,7 +176,7 @@ ScriptedImporter:
       y: 4
       width: 44
       height: 36
-    spriteID: 55dcbc04b653aa3438835014534f7323
+    spriteID: fce2e6a3540121446b38b6c68e386567
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -197,7 +197,7 @@ ScriptedImporter:
       y: 48
       width: 44
       height: 36
-    spriteID: f83a43db5f4535444913e6d5d87bd443
+    spriteID: 5ee4564c407f9a242849726af5015d44
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -206,7 +206,91 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 48}
-  spriteSheetImportData: []
+  spriteSheetImportData:
+  - name: full jump animation_1
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 7
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 28
+      y: 49
+      width: 20
+      height: 35
+    spriteID: dae955a840842d447a119e9ce524af0b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: full jump animation_3
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 7
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 81
+      y: 49
+      width: 18
+      height: 34
+    spriteID: 6100a71131df00b4a8f136ab4d0a263d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: full jump animation_6
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 7
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 45
+      y: 4
+      width: 17
+      height: 34
+    spriteID: 2cca49833bd34cb48b022c71f979eee4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: full jump animation_8
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 7
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 94
+      y: 6
+      width: 20
+      height: 34
+    spriteID: d685828d4b427224288f12ead7f8d2c3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
   asepriteLayers:
   - layerIndex: 0
     guid: -1083575561
@@ -223,7 +307,7 @@ ScriptedImporter:
         y: 0
         width: 58
         height: 36
-      spriteId: b162fbed5ad9544418e3eb71b5f0a47d
+      spriteId: 076dd4c40762b7c49a4048069fd65904
     - name: Frame_1
       frameIndex: 1
       additiveSortOrder: 0
@@ -232,7 +316,7 @@ ScriptedImporter:
         y: 0
         width: 43
         height: 35
-      spriteId: 1ea57b9ec18f68749b67554d8a3fb641
+      spriteId: efba52ae3d09b384186a46fa0e8c2745
     - name: Frame_2
       frameIndex: 2
       additiveSortOrder: 0
@@ -241,7 +325,7 @@ ScriptedImporter:
         y: 0
         width: 44
         height: 36
-      spriteId: 55dcbc04b653aa3438835014534f7323
+      spriteId: fce2e6a3540121446b38b6c68e386567
     - name: Frame_3
       frameIndex: 3
       additiveSortOrder: 0
@@ -250,7 +334,7 @@ ScriptedImporter:
         y: 0
         width: 44
         height: 36
-      spriteId: f83a43db5f4535444913e6d5d87bd443
+      spriteId: 5ee4564c407f9a242849726af5015d44
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -261,6 +345,42 @@ ScriptedImporter:
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: DefaultTexturePlatform
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Standalone
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: WebGL
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
     compressionQuality: 50
     forceMaximumCompressionQuality_BC6H_BC7: 0
     crunchedCompression: 0
