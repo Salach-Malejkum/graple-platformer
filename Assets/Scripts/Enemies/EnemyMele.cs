@@ -27,7 +27,7 @@ public class EnemyMele : MonoBehaviour
     {
         if (life <= 0)
         {
-            Diying();
+            Die();
         }
         timeNextDirect += Time.fixedDeltaTime;
 
@@ -47,7 +47,7 @@ public class EnemyMele : MonoBehaviour
             transform.Translate(Vector3.right * speed * Time.fixedDeltaTime, Space.World);
         }
     }
-    void Diying()
+    void Die()
     {
         Destroy(gameObject);
     }
