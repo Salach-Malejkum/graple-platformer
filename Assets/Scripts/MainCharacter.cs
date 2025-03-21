@@ -38,7 +38,6 @@ public class MainCharacter : MonoBehaviour
     void FixedUpdate()
     {
         rb2d.linearVelocityX = moveInput * speed;
-        print(rb2d.linearVelocityY);
 
         if (!isGrounded)
         {
