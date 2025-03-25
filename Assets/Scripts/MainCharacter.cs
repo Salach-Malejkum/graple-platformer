@@ -15,6 +15,9 @@ public class MainCharacter : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
 
+    [Header("Grappling")]
+    [SerializeField] private GrapplingGun grapplingGun;
+
     private bool isGrounded = true;
     private float moveInput;
     private Rigidbody2D rb2d;
@@ -37,6 +40,9 @@ public class MainCharacter : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (grapplingGun.GetIsGrappling())
+            return;
+
         rb2d.linearVelocityX = moveInput * speed;
 
         if (!isGrounded)

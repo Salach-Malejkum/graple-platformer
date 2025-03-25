@@ -27,7 +27,7 @@ public class GrapplingGun : MonoBehaviour
     [SerializeField] private float maxDistnace = 20;
 
     private Camera mainCamera;
-    private bool isGrapplingTest = false;
+    private bool isGrappling = false;
 
     private enum LaunchType
     {
@@ -49,32 +49,6 @@ public class GrapplingGun : MonoBehaviour
         m_springJoint2D.enabled = false;
         mainCamera = Camera.main;
 
-    }
-
-    private void Update()
-    {
-        if (isGrapplingTest)
-        {
-            if (grappleRope.enabled)
-            {
-                RotateGun(grapplePoint.Value, false);
-            }
-            else
-            {
-                Vector2 mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-                RotateGun(mousePos, true);
-            }
-
-            if (launchToPoint && grappleRope.isGrappling)
-            {
-                if (launchType == LaunchType.Transform_Launch)
-                {
-                    Vector2 firePointDistnace = firePoint.position - gunHolder.localPosition;
-                    Vector2 targetPos = grapplePoint.Value - firePointDistnace;
-                    gunHolder.position = Vector2.Lerp(gunHolder.position, targetPos, Time.deltaTime * launchSpeed);
-                }
-            }
-        }
     }
 
     void RotateGun(Vector3 lookPoint, bool allowRotationOverTime)
@@ -119,10 +93,6 @@ public class GrapplingGun : MonoBehaviour
                 m_springJoint2D.frequency = launchSpeed;
                 m_springJoint2D.enabled = true;
                 break;
-            case LaunchType.Transform_Launch:
-                m_rigidbody.gravityScale = 0;
-                m_rigidbody.linearVelocity = Vector2.zero;
-                break;
         }
     }
 
@@ -151,18 +121,18 @@ public class GrapplingGun : MonoBehaviour
 
     private void OnGrapple()
     {
-        if (!isGrapplingTest)
+        if (!isGrappling)
         {
             SetGrapplePoint();
-            isGrapplingTest = true;
+            isGrappling = true;
         }
         
-        else if (isGrapplingTest)
+        else if (isGrappling)
         {
             grappleRope.enabled = false;
             m_springJoint2D.enabled = false;
             m_rigidbody.gravityScale = 1;
-            isGrapplingTest = false;
+            isGrappling = false;
         }
     }
 
@@ -172,5 +142,10 @@ public class GrapplingGun : MonoBehaviour
 
         Vector2 crosshairPos = mainCamera.ScreenToWorldPoint(input);
         RotateGun(input, true);
+    }
+
+    public bool GetIsGrappling()
+    {
+        return isGrappling;
     }
 }
