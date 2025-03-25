@@ -85,6 +85,7 @@ MonoBehaviour:
   speed: 5
   animator: {fileID: 5907397255262324553}
   spriteRenderer: {fileID: 8236503461972281742}
+  grapplingGun: {fileID: 7307608212721824091}
 --- !u!114 &2805352300691361368
 MonoBehaviour:
   m_ObjectHideFlags: 0
