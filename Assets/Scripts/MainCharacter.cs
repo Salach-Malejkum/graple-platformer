@@ -28,6 +28,7 @@ public class MainCharacter : MonoBehaviour
         life = maxLife;
         rb2d = GetComponent<Rigidbody2D>();
     }
+
     public void TakeDamage(float damage)
     {
         life -= damage;
@@ -96,6 +97,30 @@ public class MainCharacter : MonoBehaviour
         else if (moveInput < 0)
         {
             spriteRenderer.flipX = true;
+        }
+    }
+
+    private void OnGrapple()
+    {
+        grapplingGun.OnGrapple();
+    }
+
+    private void OnCrosshair(InputValue inputValue)
+    {
+        Vector2 direction = inputValue.Get<Vector2>();
+        grapplingGun.OnCrosshair(direction);
+    }
+
+    private void OnControlsChanged(PlayerInput obj)
+    {
+        switch (obj.currentControlScheme) 
+        {
+            case "Gamepad":
+                grapplingGun.SetIsGamepad(true);
+                break;
+            default:
+                grapplingGun.SetIsGamepad(false);
+                break;
         }
     }
 }

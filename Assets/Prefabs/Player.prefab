@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4519751723697537417}
   - component: {fileID: 138997718891931543}
   - component: {fileID: 3384901930942834112}
-  - component: {fileID: 2805352300691361368}
   - component: {fileID: 5369319636921885378}
   - component: {fileID: 8460984369902565663}
+  - component: {fileID: 5185424035408652437}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -86,36 +86,6 @@ MonoBehaviour:
   animator: {fileID: 5907397255262324553}
   spriteRenderer: {fileID: 8236503461972281742}
   grapplingGun: {fileID: 7307608212721824091}
---- !u!114 &2805352300691361368
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 17815851205397871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 33bbe38d66b2c1749854aa5c3f34cb14, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: PlayerController
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!61 &5369319636921885378
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -183,6 +153,36 @@ SpringJoint2D:
   m_Distance: 0.05
   m_DampingRatio: 0
   m_Frequency: 1
+--- !u!114 &5185424035408652437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17815851205397871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 33bbe38d66b2c1749854aa5c3f34cb14, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: PlayerController
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &3242206233437405421
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,7 +475,6 @@ GameObject:
   - component: {fileID: 2375769517590485605}
   - component: {fileID: 4798410121177673814}
   - component: {fileID: 7307608212721824091}
-  - component: {fileID: 1206680166747826239}
   m_Layer: 0
   m_Name: GrapplingGun
   m_TagString: Untagged
@@ -567,50 +566,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grappleRope: {fileID: 7803527120621616390}
-  grappleToAll: 0
-  grappableLayerNumber: 3
   gunHolder: {fileID: 4519751723697537417}
   gunPivot: {fileID: 6827918612357834663}
   firePoint: {fileID: 6827918612357834663}
   m_springJoint2D: {fileID: 8460984369902565663}
   m_rigidbody: {fileID: 138997718891931543}
-  rotationSpeed: 4
   hasMaxDistance: 1
   maxDistnace: 6
-  launchToPoint: 1
   launchType: 1
   launchSpeed: 1
   grappleDistanceVector: {x: 0, y: 0}
---- !u!114 &1206680166747826239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5883724842955014379}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 33bbe38d66b2c1749854aa5c3f34cb14, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: PlayerController
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!1 &5981367615910849115
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,10 +6,6 @@ public class GrapplingGun : MonoBehaviour
     [Header("Scripts Ref:")]
     public GrapplingRope grappleRope;
 
-    [Header("Layers Settings:")]
-    [SerializeField] private bool grappleToAll = false;
-    [SerializeField] private int grappableLayerNumber = 9;
-
     [Header("Transform Ref:")]
     public Transform gunHolder;
     public Transform gunPivot;
@@ -18,9 +14,6 @@ public class GrapplingGun : MonoBehaviour
     [Header("Physics Ref:")]
     public SpringJoint2D m_springJoint2D;
     public Rigidbody2D m_rigidbody;
-
-    [Header("Rotation:")]
-    [Range(0, 60)] [SerializeField] private float rotationSpeed = 4;
 
     [Header("Distance:")]
     [SerializeField] private bool hasMaxDistance = false;
@@ -36,12 +29,12 @@ public class GrapplingGun : MonoBehaviour
     }
 
     [Header("Launching:")]
-    [SerializeField] private bool launchToPoint = true;
     [SerializeField] private LaunchType launchType = LaunchType.Physics_Launch;
     [SerializeField] private float launchSpeed = 1;
 
     [HideInInspector] public Vector2? grapplePoint;
     [HideInInspector] public Vector2 grappleDistanceVector;
+    private bool isGamepad;
 
     private void Start()
     {
@@ -51,11 +44,15 @@ public class GrapplingGun : MonoBehaviour
 
     }
 
-    void RotateGun(Vector3 lookPoint, bool allowRotationOverTime)
+    void RotateGun(Vector3 lookPoint)
     {
-        Vector3 distanceVector = (lookPoint - gunPivot.position).normalized;
+        Vector3 distanceVector = lookPoint;
+        if (!isGamepad)
+        {
+            distanceVector = (lookPoint - gunPivot.position).normalized;
+        }
 
-        float angle = Mathf.Atan2(lookPoint.y, lookPoint.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(distanceVector.y, distanceVector.x) * Mathf.Rad2Deg;
         gunPivot.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
@@ -86,8 +83,6 @@ public class GrapplingGun : MonoBehaviour
                 m_springJoint2D.connectedAnchor = grapplePoint.Value;
 
                 Vector2 distanceVector = grapplePoint.Value - (Vector2)transform.position;
-                // Vector2 distanceVector = grapplePoint - (Vector2)gunPivot.position;
-                print(distanceVector);
 
                 m_springJoint2D.distance = 0;
                 m_springJoint2D.frequency = launchSpeed;
@@ -96,6 +91,46 @@ public class GrapplingGun : MonoBehaviour
         }
     }
 
+    public void OnGrapple()
+    {
+        if (!isGrappling)
+        {
+            SetGrapplePoint();
+            isGrappling = true;
+        }
+        
+        else if (isGrappling)
+        {
+            grappleRope.enabled = false;
+            m_springJoint2D.enabled = false;
+            m_rigidbody.gravityScale = 1;
+            isGrappling = false;
+        }
+    }
+
+    public void OnCrosshair(Vector2 direction)
+    {
+        if (isGamepad)
+        {
+            RotateGun(direction);
+        }
+        else
+        {
+            Vector2 crosshairPos = mainCamera.ScreenToWorldPoint(direction);
+            RotateGun(crosshairPos);
+        }
+    }
+
+    public bool GetIsGrappling()
+    {
+        return isGrappling;
+    }
+
+    public void SetIsGamepad(bool value)
+    {
+        isGamepad = value;
+    }
+    
     private void OnDrawGizmosSelected()
     {
         if (firePoint != null && hasMaxDistance)
@@ -117,35 +152,5 @@ public class GrapplingGun : MonoBehaviour
             Gizmos.color = Color.yellow;
             Gizmos.DrawLine(grapplePoint.Value, gunPivot.position);
         }
-    }
-
-    private void OnGrapple()
-    {
-        if (!isGrappling)
-        {
-            SetGrapplePoint();
-            isGrappling = true;
-        }
-        
-        else if (isGrappling)
-        {
-            grappleRope.enabled = false;
-            m_springJoint2D.enabled = false;
-            m_rigidbody.gravityScale = 1;
-            isGrappling = false;
-        }
-    }
-
-    private void OnCrosshair(InputValue inputValue)
-    {
-        Vector2 input = inputValue.Get<Vector2>();
-
-        Vector2 crosshairPos = mainCamera.ScreenToWorldPoint(input);
-        RotateGun(input, true);
-    }
-
-    public bool GetIsGrappling()
-    {
-        return isGrappling;
     }
 }
