@@ -14,6 +14,8 @@ public class MainCharacter : MonoBehaviour
     [Header("Sprite and animations properties")]
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private AudioClip stepSound;
+    [SerializeField] private GameObject smokeVFX;
 
     [Header("Grappling")]
     [SerializeField] private GrapplingGun grapplingGun;
@@ -24,12 +26,14 @@ public class MainCharacter : MonoBehaviour
 
     [Header("Pause menu")]
     [SerializeField] private GameObject pauseMenu;
+    private AudioSource audioSource;
 
 
     private void Awake()
     {
         life = maxLife;
         rb2d = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void TakeDamage(float damage)
@@ -139,5 +143,15 @@ public class MainCharacter : MonoBehaviour
         {
             Time.timeScale = 1;
         }
+    }
+
+    public void Step()
+    {
+        audioSource.PlayOneShot(stepSound);
+
+        Vector3 smokePos = new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z);
+        GameObject smoke = Instantiate(smokeVFX, smokePos, Quaternion.identity);
+        smoke.GetComponent<SpriteRenderer>().flipX = spriteRenderer.flipX;
+        Destroy(smoke, 0.8f);
     }
 }
