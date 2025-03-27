@@ -36,12 +36,15 @@ public class GrapplingGun : MonoBehaviour
     [HideInInspector] public Vector2 grappleDistanceVector;
     private bool isGamepad;
 
+    private void Awake()
+    {
+        mainCamera = Camera.main;
+    }
+
     private void Start()
     {
         grappleRope.enabled = false;
         m_springJoint2D.enabled = false;
-        mainCamera = Camera.main;
-
     }
 
     void RotateGun(Vector3 lookPoint)
