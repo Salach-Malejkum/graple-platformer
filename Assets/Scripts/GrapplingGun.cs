@@ -110,6 +110,9 @@ public class GrapplingGun : MonoBehaviour
 
     public void OnCrosshair(Vector2 direction)
     {
+        if (Time.timeScale == 0)
+            return;
+
         if (isGamepad)
         {
             RotateGun(direction);

@@ -22,6 +22,9 @@ public class MainCharacter : MonoBehaviour
     private float moveInput;
     private Rigidbody2D rb2d;
 
+    [Header("Pause menu")]
+    [SerializeField] private GameObject pauseMenu;
+
 
     private void Awake()
     {
@@ -121,6 +124,20 @@ public class MainCharacter : MonoBehaviour
             default:
                 grapplingGun.SetIsGamepad(false);
                 break;
+        }
+    }
+
+    private void OnPause()
+    {
+        pauseMenu.SetActive(!pauseMenu.activeSelf);
+
+        if (pauseMenu.activeSelf)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
         }
     }
 }
