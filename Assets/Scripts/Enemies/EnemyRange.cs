@@ -37,7 +37,7 @@ public class EnemyRange : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (isShooting) return; // No se mueve si está disparando
+        if (isShooting) return; 
 
         float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
         if (life <= 0) Die();
@@ -50,13 +50,12 @@ public class EnemyRange : MonoBehaviour
             transform.localRotation = isMovingLeft ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
         }
 
-        // Solo dispara si está en rango y mirando al jugador
+       
         if (distanceFromPlayer <= shootingRange && CanSeePlayer() && nextFire < Time.time)
         {
             StartCoroutine(StopAndShoot());
         }
 
-        // Movimiento solo si no está disparando
         if (!isShooting)
         {
             float moveDirection = isMovingLeft ? -1f : 1f;
@@ -66,14 +65,14 @@ public class EnemyRange : MonoBehaviour
 
     bool CanSeePlayer()
     {
-        // Si el enemigo está volteado (mirando a la izquierda)
+  
         if (isMovingLeft)
         {
-            return player.position.x < transform.position.x; // Dispara solo si el jugador está a la izquierda
+            return player.position.x < transform.position.x;
         }
         else
         {
-            return player.position.x > transform.position.x; // Dispara solo si el jugador está a la derecha
+            return player.position.x > transform.position.x;
         }
     }
 
@@ -85,7 +84,7 @@ public class EnemyRange : MonoBehaviour
         Instantiate(bullet, bulletParent.transform.position, Quaternion.identity);
         nextFire = Time.time + fireRate;
 
-        yield return new WaitForSeconds(1f); // Esperar 1 segundo
+        yield return new WaitForSeconds(1f);
 
         isShooting = false;
         if (animator) animator.enabled = true;
