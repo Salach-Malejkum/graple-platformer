@@ -88,8 +88,11 @@ MonoBehaviour:
   spriteRenderer: {fileID: 8236503461972281742}
   stepSound: {fileID: 8300000, guid: c5c54a6875b02d946a4eac0c436b7550, type: 3}
   smokeVFX: {fileID: 5368800970286599138, guid: 4084073cafde16a448344fcfd4cd165c, type: 3}
+  ouchSound: {fileID: 8300000, guid: 03b02c173d8020c4fad8ba19632eda38, type: 3}
   grapplingGun: {fileID: 7307608212721824091}
   pauseMenu: {fileID: 0}
+  lifeText: {fileID: 0}
+  mainMenu: {fileID: 102900000, guid: 095846c97f5425e4a9485abf0c719bc3, type: 3}
 --- !u!61 &5369319636921885378
 BoxCollider2D:
   m_ObjectHideFlags: 0

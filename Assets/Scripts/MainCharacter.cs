@@ -1,5 +1,9 @@
+using System.Collections;
+using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class MainCharacter : MonoBehaviour
 {
@@ -16,6 +20,7 @@ public class MainCharacter : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private AudioClip stepSound;
     [SerializeField] private GameObject smokeVFX;
+    [SerializeField] private AudioClip ouchSound;
 
     [Header("Grappling")]
     [SerializeField] private GrapplingGun grapplingGun;
@@ -28,6 +33,12 @@ public class MainCharacter : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;
     private AudioSource audioSource;
 
+    [Header("Life UI")]
+    [SerializeField] private TextMeshProUGUI lifeText;
+
+    [Header("Die scene load")]
+    [SerializeField] private SceneAsset mainMenu;
+
 
     private void Awake()
     {
@@ -39,6 +50,9 @@ public class MainCharacter : MonoBehaviour
     public void TakeDamage(float damage)
     {
         life -= damage;
+        lifeText.text = "x " + life;
+        StartCoroutine(RedBlink());
+        audioSource.PlayOneShot(ouchSound);
 
         if (life <= 0)
         {
@@ -48,8 +62,11 @@ public class MainCharacter : MonoBehaviour
 
     void FixedUpdate()
     {
+        animator.SetBool("IsGrappling", grapplingGun.GetIsGrappling());
         if (grapplingGun.GetIsGrappling())
+        {
             return;
+        }
 
         rb2d.linearVelocityX = moveInput * speed;
 
@@ -57,11 +74,17 @@ public class MainCharacter : MonoBehaviour
         {
             animator.SetFloat("YVelocity", rb2d.linearVelocityY);
         }
+        else
+        {
+            animator.SetFloat("YVelocity", 0);
+        }
+
+        animator.SetBool("IsGrounded", isGrounded);
     }
 
     void Die()
     {
-        Destroy(gameObject);
+        SceneManager.LoadScene(mainMenu.name);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -91,7 +114,6 @@ public class MainCharacter : MonoBehaviour
         if (isGrounded)
         {
             rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            animator.SetTrigger("Jump");
         }
     }
 
@@ -169,5 +191,16 @@ public class MainCharacter : MonoBehaviour
         {
             transform.parent = null;
         }
+    }
+
+    private IEnumerator RedBlink()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            spriteRenderer.color = i % 2 == 0 ? Color.red : Color.white;
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        spriteRenderer.color = Color.white;
     }
 }

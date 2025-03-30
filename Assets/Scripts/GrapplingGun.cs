@@ -122,6 +122,11 @@ public class GrapplingGun : MonoBehaviour
         }
         else
         {
+            if (mainCamera == null)
+            {
+                mainCamera = Camera.main;
+            }
+
             Vector2 crosshairPos = mainCamera.ScreenToWorldPoint(direction);
             RotateGun(crosshairPos);
         }
