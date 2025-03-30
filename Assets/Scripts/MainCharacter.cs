@@ -98,6 +98,10 @@ public class MainCharacter : MonoBehaviour
         {
             collision.transform.GetComponent<EnemyMele>().TakeDamage(damage);
         }
+        if (collision.GetComponent<EnemyRange>())
+        {
+            collision.transform.GetComponent<EnemyRange>().TakeDamage(damage);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)

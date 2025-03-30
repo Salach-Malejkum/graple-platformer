@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyMele : MonoBehaviour
 {
     [SerializeField] private float speed;
-    [SerializeField] private int timeDirect;
+    [SerializeField] private float timeDirect;
     [SerializeField] private float life;
     [SerializeField] private float maxLife;
     [SerializeField] private float damage;
