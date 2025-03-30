@@ -56,7 +56,7 @@ public class MainCharacter : MonoBehaviour
 
         if (life <= 0)
         {
-            Die();
+            StartCoroutine(Die());
         }
     }
 
@@ -82,8 +82,12 @@ public class MainCharacter : MonoBehaviour
         animator.SetBool("IsGrounded", isGrounded);
     }
 
-    void Die()
+    private IEnumerator Die()
     {
+        Time.timeScale = 0;
+        CameraShake.Instance.Shake(0.2f, 0.05f);
+        yield return new WaitForSecondsRealtime(1f);
+        Time.timeScale = 1;
         SceneManager.LoadScene(mainMenu.name);
     }
 
