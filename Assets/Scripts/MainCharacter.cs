@@ -1,9 +1,11 @@
 using System.Collections;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class MainCharacter : MonoBehaviour
 {
@@ -14,7 +16,6 @@ public class MainCharacter : MonoBehaviour
     [SerializeField] private float jumpForce;
     [SerializeField] private float speed;
     
-
     [Header("Sprite and animations properties")]
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -37,8 +38,10 @@ public class MainCharacter : MonoBehaviour
     [SerializeField] private TextMeshProUGUI lifeText;
 
     [Header("Die scene load")]
-    [SerializeField] private SceneAsset mainMenu;
-
+    #if UNITY_EDITOR
+    [SerializeField] private SceneAsset mainMenu; // Solo en el editor
+    #endif
+    [SerializeField] private string mainMenuName; // Se usa en runtime
 
     private void Awake()
     {
@@ -68,11 +71,11 @@ public class MainCharacter : MonoBehaviour
             return;
         }
 
-        rb2d.linearVelocityX = moveInput * speed;
+        rb2d.linearVelocity = new Vector2(moveInput * speed, rb2d.linearVelocity.y);
 
         if (!isGrounded)
         {
-            animator.SetFloat("YVelocity", rb2d.linearVelocityY);
+            animator.SetFloat("YVelocity", rb2d.linearVelocity.y);
         }
         else
         {
@@ -88,7 +91,15 @@ public class MainCharacter : MonoBehaviour
         CameraShake.Instance.Shake(0.2f, 0.05f);
         yield return new WaitForSecondsRealtime(1f);
         Time.timeScale = 1;
-        SceneManager.LoadScene(mainMenu.name);
+        
+        if (!string.IsNullOrEmpty(mainMenuName))
+        {
+            SceneManager.LoadScene(mainMenuName);
+        }
+        else
+        {
+            Debug.LogError("El nombre del men� principal no est� asignado.");
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -112,7 +123,6 @@ public class MainCharacter : MonoBehaviour
     private void OnMovement(InputValue input)
     {   
         moveInput = input.Get<float>();
-        
         animator.SetBool("IsRunning", moveInput != 0);
         FlipSprite();
     }
@@ -187,7 +197,7 @@ public class MainCharacter : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "MovablePlatform")
+        if (collision.gameObject.CompareTag("MovablePlatform"))
         {
             transform.parent = collision.transform;
         }
@@ -195,7 +205,7 @@ public class MainCharacter : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "MovablePlatform") 
+        if (collision.gameObject.CompareTag("MovablePlatform")) 
         {
             transform.parent = null;
         }
@@ -211,4 +221,15 @@ public class MainCharacter : MonoBehaviour
 
         spriteRenderer.color = Color.white;
     }
+
+    #if UNITY_EDITOR
+    private void OnValidate()
+    {
+        // Sincroniza el nombre de la escena autom�ticamente cuando se asigne en el inspector
+        if (mainMenu != null)
+        {
+            mainMenuName = mainMenu.name;
+        }
+    }
+    #endif
 }
